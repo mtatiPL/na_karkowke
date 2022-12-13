@@ -1,0 +1,41 @@
+<form #formularz="ngForm">
+  <div class="formularz">
+<h1>Zamówienie:</h1>
+<label>
+  <span>Imię i nazwisko:</span>
+  <input type="text" class="wpis" id="imieNazwisko" [(ngModel)]="imieNazwisko" name="imieNazwisko"  
+  required #imieNazwiskoForm="ngModel">
+  <div class="alert" *ngIf="imieNazwiskoForm.invalid && imieNazwiskoForm.touched">
+    Pole imie i nazwisko jest wymagane
+  </div>
+</label>
+  <label>
+    <span>Email:</span>
+   <input type="email" class="wpis" id="Email" [(ngModel)]="email" name="Email" 
+   required pattern=".+@.+" #emailForm="ngModel">
+  <div class="alert" *ngIf="emailForm.invalid && emailForm.touched">
+  </div>
+  <div class="alert" *ngIf="emailForm.touched && emailForm.errors?.['pattern']"><p style="color:red">To nie jest email.</p> Podaj email, aby wysłać fakture.</div>
+  </label>
+  <label>
+    <span>Produkt:</span>
+    <select id="Produkt" class="produkt" [(ngModel)]="produkt"  name="produkt">
+      <option value="pralka">pralka</option>
+      <option value="zmywarka">zmywarka</option>
+      <option value="lodowka">lodowka</option>
+      <option value="tv">tv</option>
+    </select>
+  </label>
+  <label>
+    <span>Ilosc:</span>
+    <input type="number" [(ngModel)]="ilosc"  name="ilosc" id="ilosc" class="wpis" min="1">
+  </label>
+  <label>
+    <span>Wiadomosc:</span>
+    <textarea class="wpis" id="wiadomosc" [(ngModel)]="wiadomosc"  name="wiadomosc"></textarea><br>
+      <button type="submit" class="btn" [disabled]="!formularz.form.valid">Zamow</button>
+      <button type="button" class="btn" (click)="formularz.resetForm()">Reset</button>
+  </label>
+  
+</div>
+</form>
